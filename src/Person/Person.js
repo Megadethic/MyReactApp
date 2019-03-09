@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Person extends Component {
-  render() {
-    return (
-      <div>
-        Person name = { this.props.name }
-      </div>
-    );
-  }
+const person = (props) => {
+    return <div onClick={props.click}>
+        My name is {props.name}! {props.children}
+    </div>
 };
 
-export default Person;
+export default person;
