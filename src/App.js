@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person.js';
+import './Person/Person.css';
 
 class App extends Component {
     state = {
@@ -10,11 +11,11 @@ class App extends Component {
         ]
     };
 
-    changeNameHandler = (newName) => {
+    changeNameHandler = (event) => {
         this.setState({
                 persons: [
                     {name: 'Pasha', note: 'I am a developer of this project.'},
-                    {name: newName, note: 'just me'}
+                    {name: event.target.value, note: 'just me'}
                 ]
             }
         );
@@ -28,7 +29,8 @@ class App extends Component {
                 <Person name={this.state.persons[0].name}>
                     {this.state.persons[0].note}
                 </Person>
-                <Person name={this.state.persons[1].name} click={this.changeNameHandler.bind(this, 'Dimma')}>
+                <Person name={this.state.persons[1].name}
+                        change={this.changeNameHandler}>
                     {this.state.persons[1].note}
                 </Person>
             </div>

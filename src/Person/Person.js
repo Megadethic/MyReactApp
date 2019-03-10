@@ -1,8 +1,9 @@
 import React from 'react'
 
 const person = (props) => {
-    return <div onClick={props.click}>
-        My name is {props.name}! {props.children}
+    return <div className="Person">
+        My name is {props.name}! {props.children}<br/>
+        <input onChange={props.change}/>
     </div>
 };
 
