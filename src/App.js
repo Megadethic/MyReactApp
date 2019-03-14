@@ -2,48 +2,50 @@ import React, {Component} from 'react';
 import './App.css';
 import './Person/Person.css';
 import Person from './Person/Person.js';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
     state = {
         persons: [
-            {name: 'Pasha', note: 'I am a developer of this project.'},
-            {name: 'Anton', note: ''}
+            {id: 'qwe', name: 'Pasha'},
+            {id: 'asd', name: 'Dima'},
+            {id: 'zxc', name: 'Sveta'},
+            {id: 'rty', name: 'Alex'},
+            {id: 'fgh', name: 'Anton'}
         ],
-        username: "mepasha"
+        showPersons: false
     };
 
-    changeNameHandler = (event) => {
-        this.setState({
-                persons: [
-                    {name: 'Pasha', note: 'I am a developer of this project.'},
-                    {name: event.target.value, note: 'just me'}
-                ]
-            }
-        );
+    changeNameHandler = (event, personId) => {
+        const personIndex = this.state.persons.findIndex(p => p.id === personId);
+        const person = {...this.state.persons[personIndex]};
+        person.name = event.target.value;
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        this.setState({persons: persons});
     };
 
-    changeUserName = (event) => {
-        this.setState({username: event.target.value});
+    showPersons = () => {
+        this.setState({showPersons: !this.state.showPersons})
     };
 
     render() {
+        let persons = null;
+
+        if (this.state.showPersons) {
+            persons = this.state.persons.map(person => {
+                return <Person
+                    key={person.id}
+                    name={person.name}
+                    changeNameHandler={(event) => this.changeNameHandler(event, person.id)}/>
+            });
+        }
+
         return (
             <div className="App">
                 <h1>Learning</h1>
-                <button onClick={this.changeNameHandler}>Change name</button>
-                <Person name={this.state.persons[0].name}>
-                    {this.state.persons[0].note}
-                </Person>
-                <Person name={this.state.persons[1].name}
-                        change={this.changeNameHandler}>
-                    {this.state.persons[1].note}
-                </Person>
+                <button onClick={this.showPersons}>Show Persons</button>
+                {persons}
 
-                <UserInput change={this.changeUserName}
-                           name={this.state.username}/>
-                <UserOutput name={this.state.username}/>
             </div>
         );
     }
