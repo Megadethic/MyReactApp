@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/Person.js';
 import './Person/Person.css';
+import Person from './Person/Person.js';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
     state = {
         persons: [
             {name: 'Pasha', note: 'I am a developer of this project.'},
             {name: 'Anton', note: ''}
-        ]
+        ],
+        username: "mepasha"
     };
 
     changeNameHandler = (event) => {
@@ -19,6 +22,10 @@ class App extends Component {
                 ]
             }
         );
+    };
+
+    changeUserName = (event) => {
+        this.setState({username: event.target.value});
     };
 
     render() {
@@ -33,6 +40,10 @@ class App extends Component {
                         change={this.changeNameHandler}>
                     {this.state.persons[1].note}
                 </Person>
+
+                <UserInput change={this.changeUserName}
+                           name={this.state.username}/>
+                <UserOutput name={this.state.username}/>
             </div>
         );
     }
