@@ -1,7 +1,7 @@
 .Person {
     border: 1px solid #dedede;
     border-radius: 5px;
-    margin: 5px;
+    margin: 5px auto;
     padding: 5px;
     width: 50%;
     background-color: #f2f2f2;
