@@ -1,6 +1,6 @@
 import React from 'react';
 
-const userInput = (props) => {
+const userInput = props => {
     return <div>
         <input onChange={props.change} type='text' placeholder='Change Username'/><br/>
         <div>{props.name}</div>

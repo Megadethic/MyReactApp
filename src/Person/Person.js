@@ -1,6 +1,6 @@
 import React from 'react'
 
-const person = (props) => {
+const person = props => {
     return <div className="Person">
         My name is {props.name}!<br/>
         <input onChange={props.changeNameHandler}/>

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import './Person/Person.css';
-import Person from './Person/Person.js';
+import Person from './Person/Person';
+import ValidationText from './ValidationText/ValidationText';
+import Char from './Char/Char';
 
 class App extends Component {
     state = {
@@ -12,7 +14,8 @@ class App extends Component {
             {id: 'rty', name: 'Alex'},
             {id: 'fgh', name: 'Anton'}
         ],
-        showPersons: false
+        showPersons: false,
+        text: ''
     };
 
     changeNameHandler = (event, personId) => {
@@ -28,6 +31,15 @@ class App extends Component {
         this.setState({showPersons: !this.state.showPersons})
     };
 
+    changeTextHandler = event => {
+        this.setState({text: event.target.value})
+    };
+
+    removeCharHandler = (index) => {
+        let text = this.state.text.slice(0, index) + this.state.text.slice(++index);
+        this.setState({text: text})
+    };
+
     render() {
         let persons = null;
 
@@ -36,16 +48,29 @@ class App extends Component {
                 return <Person
                     key={person.id}
                     name={person.name}
-                    changeNameHandler={(event) => this.changeNameHandler(event, person.id)}/>
+                    changeNameHandler={event => this.changeNameHandler(event, person.id)}/>
             });
         }
+
+        let chars = this.state.text.split('').map((c, index) => {
+            return <Char key={index}
+                                  charElement={c}
+                                  removeHandler={this.removeCharHandler.bind(this, index)}/>
+        });
 
         return (
             <div className="App">
                 <h1>Learning</h1>
                 <button onClick={this.showPersons}>Show Persons</button>
                 {persons}
+                <br/>
+                <br/>
 
+                <input onChange={event => this.changeTextHandler(event)}/>
+                <p>{this.state.text}</p>
+                <ValidationText textLength={this.state.text.length}/>
+
+                {chars}
             </div>
         );
     }
