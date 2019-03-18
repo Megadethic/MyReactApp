@@ -1,8 +1,8 @@
 import React from 'react';
-import './Char.css';
+import classes from './Char.css';
 
 const Char = props => {
-    return <div className='Char' onClick={props.removeHandler}>{props.charElement}</div>
+    return <div className={classes.Char} onClick={props.removeHandler}>{props.charElement}</div>
 };
 
 export default Char;

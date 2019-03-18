@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
-import './Person/Person.css';
+import classes from './App.css';
 import Person from './Person/Person';
 import ValidationText from './ValidationText/ValidationText';
 import Char from './Char/Char';
@@ -59,7 +58,7 @@ class App extends Component {
         });
 
         return (
-            <div className="App">
+            <div className={classes.App}>
                 <h1>Learning</h1>
                 <button onClick={this.showPersons}>Show Persons</button>
                 {persons}
