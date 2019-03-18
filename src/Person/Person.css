@@ -10,3 +10,11 @@
 .Char {
     background-color: red;
 }
+
+.Person input {
+    border-radius: 5px;
+}
+
+.Person:hover {
+    background-color: #61dafb;
+}
