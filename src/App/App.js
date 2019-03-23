@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
-import ValidationText from './ValidationText/ValidationText';
-import Char from './Char/Char';
+import Char from '../Char/Char';
+import Persons from '../Persons/Persons';
+import ValidationText from '../ValidationText/ValidationText';
 
 class App extends Component {
     state = {
@@ -40,17 +40,6 @@ class App extends Component {
     };
 
     render() {
-        let persons = null;
-
-        if (this.state.showPersons) {
-            persons = this.state.persons.map(person => {
-                return <Person
-                    key={person.id}
-                    name={person.name}
-                    changeNameHandler={event => this.changeNameHandler(event, person.id)}/>
-            });
-        }
-
         let chars = this.state.text.split('').map((c, index) => {
             return <Char key={index}
                                   charElement={c}
@@ -61,7 +50,7 @@ class App extends Component {
             <div className={classes.App}>
                 <h1>Learning</h1>
                 <button onClick={this.showPersons}>Show Persons</button>
-                {persons}
+                {this.state.showPersons ? <Persons persons={this.state.persons} changeHandler={this.changeNameHandler}/> : null}
                 <br/>
                 <br/>
 
