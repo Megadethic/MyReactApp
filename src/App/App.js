@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './App.css';
-import Char from '../Char/Char';
+import Chars from '../Chars/Chars';
 import Persons from '../Persons/Persons';
 import ValidationText from '../ValidationText/ValidationText';
 
@@ -47,12 +47,6 @@ class App extends Component {
     };
 
     render() {
-        let chars = this.state.text.split('').map((c, index) => {
-            return <Char key={index}
-                                  charElement={c}
-                                  removeHandler={this.removeCharHandler.bind(this, index)}/>
-        });
-
         return (
             <div className={classes.App}>
                 <h1>Learning</h1>
@@ -68,8 +62,7 @@ class App extends Component {
                 <input onChange={event => this.changeTextHandler(event)}/>
                 <p>{this.state.text}</p>
                 <ValidationText textLength={this.state.text.length}/>
-
-                {chars}
+                <Chars text={this.state.text} removeHandler={this.removeCharHandler}/>
             </div>
         );
     }

@@ -4,9 +4,13 @@ import Person from './Person/Person';
 class Persons extends Component {
     shouldComponentUpdate( nextProps, nextState, nextContext )
     {
-        console.log( "Persons.shouldComponentUpdate" );
+        const update  = nextProps.persons !== this.props.persons;
 
-        return true;
+        if (update) {
+          console.log( "Persons.updated" );
+        }
+
+        return update;
     }
 
     render() {
