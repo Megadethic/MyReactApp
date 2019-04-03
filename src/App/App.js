@@ -17,6 +17,13 @@ class App extends Component {
         text: ''
     };
 
+    shouldComponentUpdate( nextProps, nextState, nextContext )
+    {
+        console.log( "App.shouldComponentUpdate" );
+
+        return true;
+    }
+
     changeNameHandler = (event, personId) => {
         const personIndex = this.state.persons.findIndex(p => p.id === personId);
         const person = {...this.state.persons[personIndex]};
@@ -50,7 +57,11 @@ class App extends Component {
             <div className={classes.App}>
                 <h1>Learning</h1>
                 <button onClick={this.showPersons}>Show Persons</button>
-                {this.state.showPersons ? <Persons persons={this.state.persons} changeHandler={this.changeNameHandler}/> : null}
+                {this.state.showPersons
+                    ? <Persons persons={this.state.persons}
+                               personsLength={this.state.persons.length}
+                               changeHandler={this.changeNameHandler}/>
+                    : null}
                 <br/>
                 <br/>
 

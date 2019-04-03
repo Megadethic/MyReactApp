@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import classes from './Person.css';
 
 const person = props => {
-    return <div className={classes.Person}>
-        My name is {props.name}!<br/>
-        <input onChange={props.changeHandler}/>
-    </div>
+  useEffect( () => {
+    console.log("Person.useEffect");
+  }, [props.name] );
+
+  return <div className={classes.Person}>
+    My name is {props.name}!<br/>
+    <input onChange={props.changeHandler}/>
+  </div>
 };
 
 export default person;
