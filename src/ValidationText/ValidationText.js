@@ -4,7 +4,7 @@ import classes from './ValidationText.css';
 const ValidationText = props => {
   useEffect( () => {
     console.log( "ValidationText.useEffect" );
-  }, [props.textLength] );
+  } );
 
   return <div className={classes.TextValidationMessage}>
     {
@@ -13,4 +13,4 @@ const ValidationText = props => {
   </div>
 };
 
-export default ValidationText;
+export default React.memo(ValidationText);

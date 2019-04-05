@@ -4,7 +4,7 @@ import Char from "../Char/Char";
 const Chars = ( props ) => {
   useEffect(() => {
     console.log("Chars.useEffect");
-  }, [props.text]);
+  } );
 
   return props.text
       .split( '' )
@@ -15,4 +15,4 @@ const Chars = ( props ) => {
       } );
 };
 
-export default Chars;
+export default React.memo(Chars);
