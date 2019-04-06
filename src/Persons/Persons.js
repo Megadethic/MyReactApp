@@ -1,19 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
-    shouldComponentUpdate( nextProps, nextState, nextContext )
-    {
-        const update  = nextProps.persons !== this.props.persons;
-
-        if (update) {
-          console.log( "Persons.updated" );
-        }
-
-        return update;
-    }
-
+class Persons extends PureComponent {
     render() {
+        console.log('Persons.render');
+
         return this.props.persons.map(person => {
             return <Person
                 key={person.id}
