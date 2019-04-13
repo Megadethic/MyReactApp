@@ -4,7 +4,14 @@
     margin: 5px auto;
     padding: 5px;
     width: 50%;
+}
+
+.PersonBackground {
     background-color: #f2f2f2;
+}
+
+.PersonBackground:hover {
+    background-color: #61dafb;
 }
 
 .Char {
@@ -15,6 +22,10 @@
     border-radius: 5px;
 }
 
-.Person:hover {
-    background-color: #61dafb;
+.PersonGreen {
+    background-color: #29ffb2;
+}
+
+.PersonGreen:hover {
+    background-color: #00e900;
 }

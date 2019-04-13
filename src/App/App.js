@@ -3,34 +3,31 @@ import classes from './App.css';
 import Chars from '../Chars/Chars';
 import Persons from '../Persons/Persons';
 import ValidationText from '../ValidationText/ValidationText';
+import PersonContext from '../context/person-context';
 
 class App extends Component {
     state = {
         persons: [
-            {id: 'qwe', name: 'Pasha'},
-            {id: 'asd', name: 'Dima'},
-            {id: 'zxc', name: 'Sveta'},
-            {id: 'rty', name: 'Alex'},
-            {id: 'fgh', name: 'Anton'}
+            {id: 'qwe', name: 'Pasha', changePersonBackgroundColor: false},
+            {id: 'asd', name: 'Dima', changePersonBackgroundColor: false},
+            {id: 'zxc', name: 'Sveta', changePersonBackgroundColor: false},
+            {id: 'rty', name: 'Alex', changePersonBackgroundColor: false},
+            {id: 'fgh', name: 'Anton', changePersonBackgroundColor: false}
         ],
         showPersons: false,
         text: ''
     };
 
-    shouldComponentUpdate( nextProps, nextState, nextContext )
-    {
-        console.log( "App.shouldComponentUpdate" );
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log("App.shouldComponentUpdate");
 
         return true;
     }
 
     changeNameHandler = (event, personId) => {
-        const personIndex = this.state.persons.findIndex(p => p.id === personId);
-        const person = {...this.state.persons[personIndex]};
+        const person = this.getPersonById(personId);
         person.name = event.target.value;
-        const persons = [...this.state.persons];
-        persons[personIndex] = person;
-        this.setState({persons: persons});
+        this.replacePersonById(person);
     };
 
     showPersons = () => {
@@ -46,16 +43,43 @@ class App extends Component {
         this.setState({text: text})
     };
 
+    changePersonBackgroundColorHandler = (personId) => {
+        const person = this.getPersonById(personId);
+        person.changePersonBackgroundColor = !person.changePersonBackgroundColor;
+        this.replacePersonById(person);
+    };
+
+    getPersonById = (personId) => {
+        const personIndex = this.state.persons.findIndex( p => p.id === personId);
+        return {...this.state.persons[personIndex]};
+    };
+
+    replacePersonById = (person) => {
+        const personIndex = this.state.persons.findIndex( p => p.id === person.id);
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        this.setState({persons: persons});
+    };
+
     render() {
+        let persons = null;
+
+        if (this.state.showPersons) {
+            persons = <Persons persons={this.state.persons}
+                               personsLength={this.state.persons.length}
+                               changeHandler={this.changeNameHandler}/>
+        }
+
         return (
             <div className={classes.App}>
                 <h1>Learning</h1>
                 <button onClick={this.showPersons}>Show Persons</button>
-                {this.state.showPersons
-                    ? <Persons persons={this.state.persons}
-                               personsLength={this.state.persons.length}
-                               changeHandler={this.changeNameHandler}/>
-                    : null}
+                <PersonContext.Provider
+                    value={{
+                        changeBackgroundHandler: this.changePersonBackgroundColorHandler
+                    }}>
+                    {persons}
+                </PersonContext.Provider>
                 <br/>
                 <br/>
 

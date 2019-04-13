@@ -7,8 +7,10 @@ class Persons extends PureComponent {
 
         return this.props.persons.map(person => {
             return <Person
+                id={person.id}
                 key={person.id}
                 name={person.name}
+                changePersonBackgroundColor={person.changePersonBackgroundColor}
                 changeHandler={event => this.props.changeHandler(event, person.id)}/>
         })
     }
